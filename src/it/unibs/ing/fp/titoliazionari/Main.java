@@ -17,10 +17,16 @@ public class Main {
 		listino.aggiungiTitolo(new Titolo("Asparagi", 34));
 		
 		for (Titolo a: listino.getTitoli())
-			a.aggiornaValore();
+			{
+				a.aggiornaValore();
+				System.out.println();
+				System.out.println(a.getPercentuale());
+				System.out.println(a);
+			}
 		
 		for (Titolo a: listino.getTitoli())
 		{
+			System.out.println();
 			System.out.println(a);
 			int nAzioni=InputDati.leggiInteroNonNegativo("Quante azioni vuoi comprare? ");
 			portafoglio.addLotto(new Lotto(a,nAzioni));
