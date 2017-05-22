@@ -1,9 +1,12 @@
 package it.unibs.ing.fp.titoliazionari;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 
-public class Portafoglio {
+public class Portafoglio implements Serializable{
 	
 	private String nomePersona;
 	private double valoreTotale;
@@ -14,6 +17,14 @@ public class Portafoglio {
 		nomePersona=_nomePersona;
 		valoreTotale=0;
 		lottiPosseduti=new ArrayList<>();
+	}
+	
+	public Optional<Lotto> containsLotto(String nomeTitolo) {
+	  
+		
+		return lottiPosseduti.stream()
+					  .filter(lotto -> lotto.getNomeTitolo().equalsIgnoreCase(nomeTitolo))
+					  .findFirst();
 	}
 	
 	public void addLotto(Lotto a)
@@ -31,6 +42,7 @@ public class Portafoglio {
 	
 	public double getValoreTotale()
 	{
+		calcolaValoreTotale();
 		return valoreTotale;
 	}
 	
@@ -47,6 +59,12 @@ public class Portafoglio {
 			str.append(a);
 		}
 		return str.toString();	
+	}
+	
+	public void removeVuoti() {
+		lottiPosseduti = (ArrayList<Lotto>) lottiPosseduti.stream()
+					  .filter(l -> l.getQuantita() != 0)
+					  .collect(Collectors.toList());
 	}
 
 }

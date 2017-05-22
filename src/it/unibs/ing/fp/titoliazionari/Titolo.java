@@ -1,8 +1,9 @@
 package it.unibs.ing.fp.titoliazionari;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Titolo {
+public class Titolo implements Serializable{
 	private String nome;
 	private double valore;
 	private static int MAX_RIALZO = 20;
@@ -19,12 +20,7 @@ public class Titolo {
 	{
 		return valore;
 	}
-	
-	public String getPercentuale()
-	{
-		return percentuale.toString();
-	}
-	
+		
 	public String getNome()
 	{
 		return nome;
@@ -56,11 +52,13 @@ public class Titolo {
 		
 		valore += (valore*perc/100);
 		
+		System.out.printf("Nome: %s\nVariazione percentuale: %s  \nValore: %.2f\n\n",nome,percentuale,valore);
+		
 	}
 	
 	@Override
 	public String toString() {
-		return String.format("Nome: %s %nValore: %.2f",nome,valore);
+		return String.format("Nome: %s  %nValore: %.2f\n\n",nome,valore);
 	}
 
 }
