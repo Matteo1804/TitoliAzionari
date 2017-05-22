@@ -6,8 +6,8 @@ import java.util.Random;
 public class Titolo implements Serializable{
 	private String nome;
 	private double valore;
-	private static int MAX_RIALZO = 20;
-	private static int MAX_RIBASSO = 30;
+	private static int MAX_RIALZO = 15;
+	private static int MAX_RIBASSO = 25;
 	private StringBuffer percentuale;
 
 	public Titolo(String _nome, double _valore) 
@@ -30,10 +30,6 @@ public class Titolo implements Serializable{
 	public void aggiornaValore()
 	{
 		Random rand= new Random();
-//		valore =  ((valore) * ((rand.nextGaussian()*100) % ( MAX_RIALZO + MAX_RIBASSO)) - MAX_RIBASSO/100) ;
-//		double n = (Math.pow(-1,rand.nextInt()) * rand.nextDouble());
-//		System.out.println(n);
-//		valore += valore*n;
 		double perc=0;
 		if (rand.nextBoolean())
 		{

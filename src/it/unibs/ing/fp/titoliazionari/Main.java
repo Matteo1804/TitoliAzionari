@@ -7,8 +7,8 @@ import it.unibs.fp.mylib.InputDati;
 import it.unibs.fp.mylib.MyMenu;
 import it.unibs.fp.mylib.ServizioFile;
 
-//Per salvare su file una classe, devo implementare per ogni classe l'interfaccia Serializable
 
+@SuppressWarnings("serial")
 public class Main implements Serializable{
 
 
@@ -45,23 +45,32 @@ public class Main implements Serializable{
 			elencoTitoli = new ElencoTitoli();
 		}
 		
+
 		String[] vociMenu = new String[]{"Aggiungi titolo", "Compra azioni", "Vendi azioni", "Stampa titoli", "Stampa Azioni", "Guadagno attuale", "Simula giorno", "Salva su file"};
-		MyMenu menu = new MyMenu("Titoli", vociMenu);
+		MyMenu menu = new MyMenu("Titoli Azionari", vociMenu);
 		boolean esci = false;
+		
 		
 	
 		
 		while(!esci) {
 			switch (menu.scegli()) {
 			case 1:
-				elencoTitoli.aggiungiTitolo(new Titolo("Cotex", 15.50));
+				String nome = InputDati.leggiStringaNonVuota("Inserisci il nome del titolo: ");
+				if(elencoTitoli.getTitoloByNome(nome).isPresent()) {
+					System.out.println("Titolo già presente");
+				}
+				else{
+					double valore = InputDati.leggiDoubleConMinimo("Inserisci il valore di una azione di questo titolo: ",0);
+					elencoTitoli.aggiungiTitolo(new Titolo(nome,valore));
+				}
 				break;
 			case 2:
 				elencoTitoli.printTitoli();
 				String nomeTitolo = InputDati.leggiStringaNonVuota("Inserisci il nome del titolo: ");
 				if(elencoTitoli.getTitoloByNome(nomeTitolo).isPresent()) {
 					Titolo t = elencoTitoli.getTitoloByNome(nomeTitolo).get();
-					
+
 					if(portafoglio.containsLotto(t.getNome()).isPresent()) {
 						Lotto l = portafoglio.containsLotto(t.getNome()).get();
 						System.out.println("Hai già comprato azioni "+ l.getQuantita() +" di questo titolo");
@@ -113,7 +122,8 @@ public class Main implements Serializable{
 				System.out.println(portafoglio);
 				break;
 			case 6:
-				System.out.println(portafoglio.getValoreTotale() + "€");
+				double v = portafoglio.getValoreTotale();
+				System.out.printf("%.4f €\n",v);
 				break;
 			case 7:
 				elencoTitoli.simulaGiorno();

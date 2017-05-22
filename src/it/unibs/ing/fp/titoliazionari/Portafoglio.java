@@ -12,53 +12,47 @@ public class Portafoglio implements Serializable{
 	private double valoreTotale;
 	ArrayList<Lotto> lottiPosseduti;
 	
-	public Portafoglio(String _nomePersona)
-	{
-		nomePersona=_nomePersona;
-		valoreTotale=0;
-		lottiPosseduti=new ArrayList<>();
+	public Portafoglio(String _nomePersona) {
+		nomePersona = _nomePersona;
+		valoreTotale = 0;
+		lottiPosseduti = new ArrayList<>();
 	}
-	
+
 	public Optional<Lotto> containsLotto(String nomeTitolo) {
-	  
-		
+
 		return lottiPosseduti.stream()
 					  .filter(lotto -> lotto.getNomeTitolo().equalsIgnoreCase(nomeTitolo))
 					  .findFirst();
 	}
 	
-	public void addLotto(Lotto a)
-	{
+	public void addLotto(Lotto a) {
 		lottiPosseduti.add(a);
 	}
 	
-	public void calcolaValoreTotale()
-	{
-		for(Lotto b: lottiPosseduti)
-		{
-			valoreTotale=valoreTotale+b.getTotalValue();
-		}
+	public void calcolaValoreTotale() {
+		
+		valoreTotale = lottiPosseduti.stream()
+					  .mapToDouble(Lotto::getTotalValue)
+					  .sum();
 	}
 	
-	public double getValoreTotale()
-	{
+	public double getValoreTotale() {
 		calcolaValoreTotale();
 		return valoreTotale;
 	}
-	
-	public ArrayList<Lotto> getLottiPosseduti()
-	{
+
+	public ArrayList<Lotto> getLottiPosseduti() {
 		return lottiPosseduti;
 	}
 	
 	@Override
 	public String toString() {
-		StringBuffer str= new StringBuffer(nomePersona+"\n");
-		for(Lotto a: lottiPosseduti)
-		{
-			str.append(a);
-		}
-		return str.toString();	
+		
+		 return nomePersona +"\n" + lottiPosseduti.stream()
+					  .map(Lotto::toString)
+					  .reduce((str,toappend) -> str.concat(toappend+"\n"))
+					  .get();
+
 	}
 	
 	public void removeVuoti() {
