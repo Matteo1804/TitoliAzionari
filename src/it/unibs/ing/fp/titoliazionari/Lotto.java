@@ -28,13 +28,13 @@ public class Lotto implements Serializable{
 		this.quantita = quantita;
 	}
 
-	public double getTotalValue()
+	public double valore()
 	{
-		return azione.getValore()*quantita;
+		return azione.getPrezzo()*quantita;
 	}
 	
 	@Override
 	public String toString() {
-		return String.format("Azione: %s %nQuantità:%d %nValore: %.2f%n",azione.getNome(), quantita, getTotalValue());
+		return String.format("Azione: %s %nQuantità:%d %nValore: %.2f%n",azione.getNome(), quantita, valore());
 	}
 }

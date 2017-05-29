@@ -11,11 +11,19 @@ public class Portafoglio implements Serializable{
 	private String nomePersona;
 	private double valoreTotale;
 	ArrayList<Lotto> lottiPosseduti;
+	ElencoTitoli elencoTitoli;
 	
 	public Portafoglio(String _nomePersona) {
 		nomePersona = _nomePersona;
 		valoreTotale = 0;
 		lottiPosseduti = new ArrayList<>();
+	}
+	
+	public Portafoglio(String _nomePersona, ElencoTitoli elenco) {
+		nomePersona = _nomePersona;
+		valoreTotale = 0;
+		lottiPosseduti = new ArrayList<>();
+		elencoTitoli=elenco;
 	}
 
 	public Optional<Lotto> containsLotto(String nomeTitolo) {
@@ -32,11 +40,11 @@ public class Portafoglio implements Serializable{
 	public void calcolaValoreTotale() {
 		
 		valoreTotale = lottiPosseduti.stream()
-					  .mapToDouble(Lotto::getTotalValue)
+					  .mapToDouble(Lotto::valore)
 					  .sum();
 	}
 	
-	public double getValoreTotale() {
+	public double valore() {
 		calcolaValoreTotale();
 		return valoreTotale;
 	}

@@ -16,7 +16,7 @@ public class Titolo implements Serializable{
 		valore=_valore;
 	}
 	
-	public double getValore()
+	public double getPrezzo()
 	{
 		return valore;
 	}
@@ -27,7 +27,7 @@ public class Titolo implements Serializable{
 	}
 	
 
-	public void aggiornaValore()
+	public void variazGiornaliera()
 	{
 		Random rand= new Random();
 		double perc=0;

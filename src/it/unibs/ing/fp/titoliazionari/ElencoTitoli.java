@@ -35,7 +35,7 @@ public class ElencoTitoli implements Serializable{
 	
 	
 	public void simulaGiorno() {
-		titoli.forEach(Titolo::aggiornaValore);
+		titoli.forEach(Titolo::variazGiornaliera);
 	}
 	
 	public void printTitoli() {

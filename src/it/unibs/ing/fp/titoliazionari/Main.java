@@ -31,7 +31,8 @@ public class Main implements Serializable{
 				portafoglio = contenitore.getPortafoglio();
 			} catch (ClassCastException e) {
 				System.err.println("Il file non è letto un contenitore!!");
-			} finally {
+			} 
+			finally {
 				if(portafoglio != null && elencoTitoli != null) {
 					caricamento = true;
 					System.out.println("Ho caricato strabene il file");
@@ -122,7 +123,7 @@ public class Main implements Serializable{
 				System.out.println(portafoglio);
 				break;
 			case 6:
-				double v = portafoglio.getValoreTotale();
+				double v = portafoglio.valore();
 				System.out.printf("%.4f €\n",v);
 				break;
 			case 7:
